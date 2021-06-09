@@ -77,12 +77,22 @@ class ListDefinedGraphTests(unittest.TestCase):
         self.assertSequenceEqual(neighbours_2, [0, 1])
 
 
-if __name__ == '__main__':
-    def get_test_suite():
-        s = unittest.TestSuite()
-        s.addTest(MatrixDefinedGraphTests("matrix_defined_graph_tests"))
-        s.addTest(ListDefinedGraphTests("list_defined_graph_tests"))
-        return s
+def run_some_tests():
+    # Run only the tests in the specified classes
+    test_classes_to_run = [MatrixDefinedGraphTests, ListDefinedGraphTests]
+    loader = unittest.TestLoader()
+
+    suites_list = []
+    for test_class in test_classes_to_run:
+        suite = loader.loadTestsFromTestCase(test_class)
+        suites_list.append(suite)
+
+    big_suite = unittest.TestSuite(suites_list)
 
     runner = unittest.TextTestRunner()
-    runner.run(get_test_suite())
+    results = runner.run(big_suite)
+    return results
+
+
+if __name__ == '__main__':
+    results = run_some_tests()
