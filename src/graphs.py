@@ -94,7 +94,7 @@ class ListDefinedGraph(AbstractGraph):
 
 class GraphExplorer(object):
     def __init__(self, graph):
-        if graph is not AbstractGraph:
+        if not isinstance(graph, AbstractGraph):
             raise TypeError("Value of a \"graph\" parameter has to be AbstractGraph")
         self._graph = graph
 
