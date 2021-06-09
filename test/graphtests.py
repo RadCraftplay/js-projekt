@@ -90,8 +90,7 @@ def run_some_tests():
     big_suite = unittest.TestSuite(suites_list)
 
     runner = unittest.TextTestRunner()
-    results = runner.run(big_suite)
-    return results
+    return runner.run(big_suite)
 
 
 if __name__ == '__main__':
