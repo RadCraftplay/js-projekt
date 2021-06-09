@@ -77,9 +77,25 @@ class ListDefinedGraphTests(unittest.TestCase):
         self.assertSequenceEqual(neighbours_2, [0, 1])
 
 
+class BfsExplorerTests(unittest.TestCase):
+    def test_find_path(self):
+        test_matrix = [[0, 0, 1], [0, 0, 1], [1, 1, 0]]
+        test_graph = graphs.MatrixDefinedGraph(test_matrix)
+        explorer = graphs.BfsExplorer(test_graph)
+        path = explorer.find_path(0, 1)
+        self.assertSequenceEqual(path, [0, 2, 1])
+
+    def test_cant_find_path(self):
+        test_matrix = [[0, 0, 1], [0, 0, 0], [1, 0, 0]]
+        test_graph = graphs.MatrixDefinedGraph(test_matrix)
+        explorer = graphs.BfsExplorer(test_graph)
+        path = explorer.find_path(0, 1)
+        self.assertSequenceEqual(path, [])
+
+
 def run_some_tests():
     # Run only the tests in the specified classes
-    test_classes_to_run = [MatrixDefinedGraphTests, ListDefinedGraphTests]
+    test_classes_to_run = [MatrixDefinedGraphTests, ListDefinedGraphTests, BfsExplorerTests]
     loader = unittest.TestLoader()
 
     suites_list = []
