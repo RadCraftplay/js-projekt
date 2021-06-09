@@ -64,7 +64,7 @@ class GraphExplorer(object):
     def __init__(self, graph):
         if graph is not AbstractGraph:
             raise TypeError("Value of a \"graph\" parameter has to be AbstractGraph")
-        self.graph = graph
+        self._graph = graph
 
     def find_path(self, starting_node, ending_node):
         raise NotImplementedError()
@@ -79,12 +79,12 @@ class BfsExplorer(GraphExplorer):
         node_queue = Queue()
         node_queue.put(starting_node)
 
-        visited = [False if i != starting_node else True for i in range(self.graph.get_node_list())]
-        previous_nodes = [None for i in range(self.graph.get_node_list())]
+        visited = [False if i != starting_node else True for i in range(self._graph.get_node_list())]
+        previous_nodes = [None for i in range(self._graph.get_node_list())]
 
         while node_queue.not_empty:
             current_node = node_queue.get()
-            neighbours = self.graph.get_neighbour_nodes(current_node)
+            neighbours = self._graph.get_neighbour_nodes(current_node)
 
             for next_node in neighbours:
                 if not visited[next_node]:
