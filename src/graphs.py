@@ -33,7 +33,7 @@ class MatrixDefinedGraph(AbstractGraph):
             for pointed_node_id in range(len(adjacency_matrix[node_id])):
                 if adjacency_matrix[node_id][pointed_node_id] == 0:
                     continue
-                if edges.__contains__((node_id, pointed_node_id)) or edges.__contains__((pointed_node_id, node_id)):
+                if edges.__contains__((pointed_node_id, node_id)):
                     continue
                 edges.append((node_id, pointed_node_id))
 
