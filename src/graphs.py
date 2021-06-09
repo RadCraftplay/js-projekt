@@ -1,5 +1,5 @@
 from queue import Queue
-import utils
+from src import utils
 
 
 class AbstractGraph(object):
