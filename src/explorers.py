@@ -1,5 +1,5 @@
 from collections import deque
-from graphs import AbstractGraph
+from src.graphs import AbstractGraph
 
 
 class GraphExplorer(object):
