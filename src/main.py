@@ -7,7 +7,7 @@ from src import *
 
 class Generators(object):
     @staticmethod
-    def get_adjacency_lists(list_of_node_pairs):
+    def generate_adjacency_lists(list_of_node_pairs):
         adjacency_lists = [[] for _ in data.cities]
 
         for pair in list_of_node_pairs:
@@ -17,7 +17,7 @@ class Generators(object):
         return adjacency_lists
 
     @staticmethod
-    def get_adjacency_matrix(list_of_node_pairs):
+    def generate_adjacency_matrix(list_of_node_pairs):
         adjacency_matrix = [[0 for _ in data.cities] for _ in data.cities]
 
         for pair in list_of_node_pairs:
@@ -76,8 +76,8 @@ def remove_connection():
 
 
 def confirm_action():
-    adjacency_lists = Generators.get_adjacency_lists(list_of_connections)
-    adjacency_matrix = Generators.get_adjacency_matrix(list_of_connections)
+    adjacency_lists = Generators.generate_adjacency_lists(list_of_connections)
+    adjacency_matrix = Generators.generate_adjacency_matrix(list_of_connections)
     gl = graphs.ListDefinedGraph(adjacency_lists)
     gm = graphs.MatrixDefinedGraph(adjacency_matrix)
     lex = explorers.BfsExplorer(gl)
