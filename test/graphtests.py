@@ -2,6 +2,34 @@ import unittest
 from src import *
 
 
+class GeneratorsTests(unittest.TestCase):
+    def test_generate_adjacency_lists(self):
+        expected_lists = [[] for _ in data.cities]
+        expected_lists[0] = [1]
+        expected_lists[1] = [2]
+
+        test_nodes = [graphs.NodePair(data.cities[0], data.cities[1]),
+                      graphs.NodePair(data.cities[1], data.cities[2])]
+        result = graphs.Generators.generate_adjacency_lists(test_nodes)
+
+        self.assertEqual(len(result), len(expected_lists))
+        for i in range(len(result)):
+            self.assertSequenceEqual(result[i], expected_lists[i])
+
+    def test_generate_adjacency_matrix(self):
+        expected_matrix = [[0 for _ in data.cities] for _ in data.cities]
+        expected_matrix[0][1] = 1
+        expected_matrix[1][2] = 1
+
+        test_nodes = [graphs.NodePair(data.cities[0], data.cities[1]),
+                      graphs.NodePair(data.cities[1], data.cities[2])]
+        result = graphs.Generators.generate_adjacency_matrix(test_nodes)
+
+        self.assertEqual(len(result), len(expected_matrix))
+        for i in range(len(result)):
+            self.assertSequenceEqual(result[i], expected_matrix[i])
+
+
 class MatrixDefinedGraphTests(unittest.TestCase):
     def setUp(self):
         self.test_matrix = [[0, 0, 1], [0, 0, 1], [1, 1, 0]]
