@@ -15,6 +15,10 @@ class GraphExplorer(object):
 class BfsExplorer(GraphExplorer):
     def find_path(self, starting_node, last_node):
         previous_nodes = self._solve(starting_node)
+
+        if not previous_nodes:
+            return []
+
         return self._reconstruct_path(starting_node, last_node, previous_nodes)
 
     def _solve(self, starting_node):
