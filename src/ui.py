@@ -66,19 +66,8 @@ class SetupRoutesForm(object):
         self._disconnect = Button(self._mainframe, text="Rozłącz", command=self.remove_connection)
         self._disconnect.grid(row=3, column=1)
 
-        # Labels
-        Label(self._mainframe, text=" ").grid(row=4, column=0, columnspan=2)
-        Label(self._mainframe, text="Reprezentacja:").grid(row=5, column=0)
-
-        # Graph representation
-        self._representation = Combobox(self._mainframe)
-        self._representation.grid(row=5, column=1)
-        self._representation['state'] = 'readonly'
-        self._representation['values'] = ["Macierz sąsiedztwa", "Listy sąsiedztwa"]
-        self._representation.set(self._representation['values'][0])
-
         # Confirm button
-        Label(self._mainframe, text=" ").grid(row=6, column=0, columnspan=2)
+        Label(self._mainframe, text=" ").grid(row=4, column=0, columnspan=2)
         self._confirm = Button(self._mainframe, text="Zatwierdź", command=self.confirm_action)
         self._confirm.grid(row=7, column=0, columnspan=2)
 
