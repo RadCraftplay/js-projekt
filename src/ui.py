@@ -102,3 +102,71 @@ class SetupRoutesForm(object):
 
     def show(self):
         self._window.mainloop()
+
+
+class FindRoutesForm(object):
+    def __init__(self, list_of_connections):
+        adjacency_lists = Generators.generate_adjacency_lists(list_of_connections)
+        adjacency_matrix = Generators.generate_adjacency_matrix(list_of_connections)
+        list_based_graph = graphs.ListDefinedGraph(adjacency_lists)
+        matrix_based_graph = graphs.MatrixDefinedGraph(adjacency_matrix)
+        self._list_explorer = BfsExplorer(list_based_graph)
+        self._matrix_explorer = BfsExplorer(matrix_based_graph)
+
+        self._window = Tk()
+        self._window.title("Wyszukiwanie połączeń")
+        self._window.resizable(width=False, height=False)
+
+        # Inner grid
+        self._mainframe = ttk.Frame(self._window)
+        self._mainframe.grid(column=0, row=0, sticky=(N, W, E, S), padx=5, pady=5)
+
+        # Labels over ComboBoxes
+        Label(self._mainframe, text="Z miasta:").grid(row=0, column=0)
+        Label(self._mainframe, text="Do miasta:").grid(row=0, column=1)
+
+        # ComboBoxes
+        self._city_from = Combobox(self._mainframe)
+        self._city_to = Combobox(self._mainframe)
+
+        self._city_from.grid(row=1, column=0)
+        self._city_to.grid(row=1, column=1)
+
+        self._city_from['state'] = 'readonly'
+        self._city_to['state'] = 'readonly'
+
+        self._city_from['values'] = sorted(data.cities)
+        self._city_to['values'] = sorted(data.cities)
+
+        self._city_from.set(self._city_from['values'][1])
+        self._city_to.set(self._city_from['values'][2])
+
+        # Labels
+        Label(self._mainframe, text=" ").grid(row=2, column=0, columnspan=2)
+        Label(self._mainframe, text="Reprezentacja:").grid(row=3, column=0)
+
+        # Graph representation
+        self._representation = Combobox(self._mainframe)
+        self._representation.grid(row=3, column=1)
+        self._representation['state'] = 'readonly'
+        self._representation['values'] = ["Macierz sąsiedztwa", "Listy sąsiedztwa"]
+        self._representation.set(self._representation['values'][0])
+
+        # Confirm button
+        Label(self._mainframe, text=" ").grid(row=4, column=0, columnspan=2)
+        self._search = Button(self._mainframe, text="Szukaj", command=self.search)
+        self._search.grid(row=5, column=0, columnspan=2)
+
+    def search(self):
+        explorer = self._matrix_explorer if self._representation == "Macierz sąsiedztwa" else self._list_explorer
+        c_from = utils.get_node_id_of_city_by_name(self._city_from.get())
+        c_to = utils.get_node_id_of_city_by_name(self._city_to.get())
+        path = explorer.find_path(c_from, c_to)
+
+        if not path:
+            messagebox.showwarning("Nie udało się znaleźć połączenia", "Brak połączenia na tej trasie")
+        else:
+            messagebox.showinfo("Znaleziono połączenie!", utils.print_path(path))
+
+    def show(self):
+        self._window.mainloop()
