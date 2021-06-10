@@ -14,14 +14,14 @@ class GraphExplorer(object):
 
 class BfsExplorer(GraphExplorer):
     def find_path(self, starting_node, last_node):
-        previous_nodes = self._solve(starting_node)
+        previous_nodes = self._solve(starting_node, last_node)
 
         if not previous_nodes:
             return []
 
         return self._reconstruct_path(starting_node, last_node, previous_nodes)
 
-    def _solve(self, starting_node):
+    def _solve(self, starting_node, last_node):
         node_queue = deque()
         node_queue.append(starting_node)
 
@@ -37,6 +37,10 @@ class BfsExplorer(GraphExplorer):
                     node_queue.append(next_node)
                     visited[next_node] = True
                     previous_nodes[next_node] = current_node
+
+        if len(visited) <= last_node or not visited[last_node]:
+            return []
+
         return previous_nodes
 
     @staticmethod
