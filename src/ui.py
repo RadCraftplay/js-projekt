@@ -1,14 +1,23 @@
+from enum import Enum
+
 from tkinter import *
 from tkinter import ttk, messagebox
 from tkinter.ttk import Combobox
 
 from src import *
 from src.graphs import Generators, NodePair
+from src.explorers import BfsExplorer
+
+
+class CloseReason(Enum):
+    CLOSE = 0,
+    OK = 1
 
 
 class SetupRoutesForm(object):
     def __init__(self):
         self.list_of_connections = []
+        self.close_reason = CloseReason.CLOSE
 
         self._window = Tk()
         self._window.title("Konfiguracja połączeń")
@@ -99,18 +108,8 @@ class SetupRoutesForm(object):
         self._connection_list.delete(selected[0])
 
     def confirm_action(self):
-        adjacency_lists = Generators.generate_adjacency_lists(self.list_of_connections)
-        adjacency_matrix = Generators.generate_adjacency_matrix(self.list_of_connections)
-        gl = graphs.ListDefinedGraph(adjacency_lists)
-        gm = graphs.MatrixDefinedGraph(adjacency_matrix)
-        lex = explorers.BfsExplorer(gl)
-        mex = explorers.BfsExplorer(gm)
-        gliwice = utils.get_node_id_of_city_by_name("Gliwice")
-        breslau = utils.get_node_id_of_city_by_name("Wrocław")
-        path_l = lex.find_path(gliwice, breslau)
-        path_m = mex.find_path(gliwice, breslau)
-        messagebox.showinfo("Lista: trasa", utils.print_path(path_l))
-        messagebox.showinfo("Macierz: trasa", utils.print_path(path_m))
+        self.close_reason = CloseReason.OK
+        self._window.destroy()
 
     def show(self):
         self._window.mainloop()
