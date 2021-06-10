@@ -8,7 +8,7 @@ from src.graphs import Generators, NodePair
 
 class SetupRoutesForm(object):
     def __init__(self):
-        self._list_of_connections = []
+        self.list_of_connections = []
 
         self._window = Tk()
         self._window.title("Konfiguracja połączeń")
@@ -41,7 +41,7 @@ class SetupRoutesForm(object):
         self._connections_frame = Frame(self._mainframe)
         self._connections_frame.grid(row=2, column=0, columnspan=2)
 
-        self._connection_list = Listbox(self._connections_frame, width=45, listvariable=self._list_of_connections)
+        self._connection_list = Listbox(self._connections_frame, width=45, listvariable=self.list_of_connections)
         self._connection_list.grid(row=0, column=0, sticky=(W, E))
 
         self._connection_list_scrollbar = Scrollbar(self._connections_frame, orient=VERTICAL)
@@ -81,13 +81,13 @@ class SetupRoutesForm(object):
             messagebox.showwarning("Nie można dodać połączenia!", "Nie można połączyć miasta z samym sobą!")
             return
 
-        if pair in self._list_of_connections or inverse_pair in self._list_of_connections:
+        if pair in self.list_of_connections or inverse_pair in self.list_of_connections:
             messagebox.showwarning("Nie można dodać połączenia!", "Miasta są już połączone!")
             return
 
         # Should be one list instead of two
         # but listbox works very strangely
-        self._list_of_connections.insert(0, pair)
+        self.list_of_connections.insert(0, pair)
         self._connection_list.insert(0, pair)
 
     def remove_connection(self):
@@ -95,12 +95,12 @@ class SetupRoutesForm(object):
         if len(selected) != 1:
             return
 
-        self._list_of_connections.pop(selected[0])
+        self.list_of_connections.pop(selected[0])
         self._connection_list.delete(selected[0])
 
     def confirm_action(self):
-        adjacency_lists = Generators.generate_adjacency_lists(self._list_of_connections)
-        adjacency_matrix = Generators.generate_adjacency_matrix(self._list_of_connections)
+        adjacency_lists = Generators.generate_adjacency_lists(self.list_of_connections)
+        adjacency_matrix = Generators.generate_adjacency_matrix(self.list_of_connections)
         gl = graphs.ListDefinedGraph(adjacency_lists)
         gm = graphs.MatrixDefinedGraph(adjacency_matrix)
         lex = explorers.BfsExplorer(gl)
