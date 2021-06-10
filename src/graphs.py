@@ -1,4 +1,43 @@
-from src import utils
+from src import utils, data
+
+
+class Generators(object):
+    @staticmethod
+    def generate_adjacency_lists(list_of_node_pairs):
+        adjacency_lists = [[] for _ in data.cities]
+
+        for pair in list_of_node_pairs:
+            a, b = pair.to_graph_node_ids()
+            adjacency_lists[a].append(b)
+
+        return adjacency_lists
+
+    @staticmethod
+    def generate_adjacency_matrix(list_of_node_pairs):
+        adjacency_matrix = [[0 for _ in data.cities] for _ in data.cities]
+
+        for pair in list_of_node_pairs:
+            a, b = pair.to_graph_node_ids()
+            adjacency_matrix[a][b] = 1
+
+        return adjacency_matrix
+
+
+class NodePair(object):
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+
+    def to_graph_node_ids(self):
+        a_id = utils.get_node_id_of_city_by_name(self.a)
+        b_id = utils.get_node_id_of_city_by_name(self.b)
+        return a_id, b_id
+
+    def __str__(self):
+        return "{0} <=> {1}".format(self.a, self.b)
+
+    def __eq__(self, other):
+        return self.a == other.a and self.b == other.b
 
 
 class AbstractGraph(object):
