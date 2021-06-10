@@ -66,7 +66,7 @@ class SetupRoutesForm(object):
         self._disconnect = Button(self._mainframe, text="Rozłącz", command=self.remove_connection)
         self._disconnect.grid(row=3, column=1)
 
-        # PLabels
+        # Labels
         Label(self._mainframe, text=" ").grid(row=4, column=0, columnspan=2)
         Label(self._mainframe, text="Reprezentacja:").grid(row=5, column=0)
 
