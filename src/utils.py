@@ -36,9 +36,9 @@ def print_path(node_list):
         return ""
 
     temp_list = copy.deepcopy(node_list)
-    path_str = get_city_name_by_node_id(temp_list.pop())
+    path_str = get_city_name_by_node_id(temp_list.pop(0))
 
     while len(temp_list) > 0:
-        path_str = path_str + " -> " + get_city_name_by_node_id(temp_list.pop())
+        path_str = path_str + " -> " + get_city_name_by_node_id(temp_list.pop(0))
 
     return path_str
