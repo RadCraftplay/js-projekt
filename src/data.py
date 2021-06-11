@@ -1,3 +1,5 @@
+from graphs import NodePair
+
 
 cities = [
     "Wrocław",
@@ -24,3 +26,27 @@ cities = [
 """
 List of available cities
 """
+
+initial_connections = [
+    NodePair("Wrocław", "Katowice"),
+    NodePair("Katowice", "Gliwice"),
+    NodePair("Katowice", "Zawiercie"),
+    NodePair("Gliwice", "Zawiercie"),
+    NodePair("Gliwice", "Kraków"),
+    NodePair("Kraków", "Oświęcim"),
+    NodePair("Kraków", "Miechów"),
+    NodePair("Miechów", "Kielce"),
+    NodePair("Kielce", "Radom"),
+    NodePair("Miechów", "Warszawa"),
+    NodePair("Kraków", "Wieliczka"),
+    NodePair("Kraków", "Rabka-Zdrój"),
+    NodePair("Rabka-Zdrój", "Nowy Targ"),
+    NodePair("Nowy Targ", "Zakopane"),
+    NodePair("Rabka-Zdrój", "Nowy Sącz"),
+    NodePair("Nowy Sącz", "Tarnów"),
+    NodePair("Kraków", "Tarnów"),
+    NodePair("Tarnów", "Dębica"),
+    NodePair("Dębica", "Rzeszów"),
+    NodePair("Rzeszów", "Przeworsk"),
+    NodePair("Przeworsk", "Przemyśl")
+]

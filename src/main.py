@@ -1,7 +1,8 @@
 from src.ui import SetupRoutesForm, FindRoutesForm, CloseReason
+import data
 
 if __name__ == '__main__':
-    setupForm = SetupRoutesForm()
+    setupForm = SetupRoutesForm(data.initial_connections)
     setupForm.show()
 
     while setupForm.close_reason == CloseReason.OK:
