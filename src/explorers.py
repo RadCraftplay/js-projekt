@@ -1,15 +1,17 @@
 from collections import deque
 
+from abc import ABCMeta, abstractmethod
 from src import utils
 from src.graphs import AbstractGraph
 
 
-class GraphExplorer(object):
+class GraphExplorer(metaclass=ABCMeta):
     def __init__(self, graph):
         if not isinstance(graph, AbstractGraph):
             raise TypeError("Value of a \"graph\" parameter has to be AbstractGraph")
         self._graph = graph
 
+    @abstractmethod
     def find_path(self, starting_node, ending_node):
         """
         Tries to find path from starting_node to ending_node
@@ -18,7 +20,7 @@ class GraphExplorer(object):
         :param ending_node: Last node in a path
         :return: Path in a form of node list (ex. [0, 1, 2])
         """
-        raise NotImplementedError()
+        pass
 
     def find_path_cities(self, starting_city, destination_city):
         """
