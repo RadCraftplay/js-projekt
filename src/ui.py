@@ -11,12 +11,16 @@ from src.explorers import BfsExplorer
 
 class CloseReason(Enum):
     CLOSE = 0,
-    OK = 1
+    OK = 1,
+    EDIT = 2
 
 
 class SetupRoutesForm(object):
-    def __init__(self):
-        self.list_of_connections = []
+    def __init__(self, connection_list=None):
+        if connection_list is None:
+            connection_list = []
+
+        self.list_of_connections = connection_list
         self.close_reason = CloseReason.CLOSE
 
         self._window = Tk()
@@ -71,6 +75,10 @@ class SetupRoutesForm(object):
         self._confirm = Button(self._mainframe, text="Zatwierdź", command=self.confirm_action)
         self._confirm.grid(row=7, column=0, columnspan=2)
 
+        # Add existing connections
+        for connection in reversed(self.list_of_connections):
+            self._connection_list.insert(0, connection)
+
     def add_connection(self):
         """
         Runs when user presses connect button
@@ -118,6 +126,8 @@ class FindRoutesForm(object):
         matrix_based_graph = graphs.MatrixDefinedGraph(adjacency_matrix)
         self._list_explorer = BfsExplorer(list_based_graph)
         self._matrix_explorer = BfsExplorer(matrix_based_graph)
+        self.close_reason = CloseReason.CLOSE
+        self.list_of_connections = list_of_connections
 
         self._window = Tk()
         self._window.title("Wyszukiwanie połączeń")
@@ -161,7 +171,11 @@ class FindRoutesForm(object):
         # Confirm button
         Label(self._mainframe, text=" ").grid(row=4, column=0, columnspan=2)
         self._search = Button(self._mainframe, text="Szukaj", command=self.search)
-        self._search.grid(row=5, column=0, columnspan=2)
+        self._search.grid(row=5, column=0)
+
+        # Edit connections button
+        self._edit = Button(self._mainframe, text="Edytuj poł.", command=self.edit)
+        self._edit.grid(row=5, column=1)
 
     def search(self):
         """
@@ -174,6 +188,16 @@ class FindRoutesForm(object):
             messagebox.showwarning("Nie udało się znaleźć połączenia", "Brak połączenia na tej trasie")
         else:
             messagebox.showinfo("Znaleziono połączenie!", utils.print_path(path))
+
+    def edit(self):
+        """
+        Runs when user presses edit button
+        """
+
+        # Workaround - I had couple of problems with multiple windows,
+        # so I am just closing the window and reopening configuration dialog
+        self.close_reason = CloseReason.EDIT
+        self._window.destroy()
 
     def show(self):
         self._window.mainloop()
