@@ -28,11 +28,10 @@ List of available cities
 """
 
 initial_connections = [
-    NodePair("Wrocław", "Katowice"),
+    NodePair("Wrocław", "Gliwice"),
     NodePair("Katowice", "Gliwice"),
     NodePair("Katowice", "Zawiercie"),
-    NodePair("Gliwice", "Zawiercie"),
-    NodePair("Gliwice", "Kraków"),
+    NodePair("Katowice", "Kraków"),
     NodePair("Kraków", "Oświęcim"),
     NodePair("Kraków", "Miechów"),
     NodePair("Miechów", "Kielce"),
