@@ -1,2 +1,3 @@
-cd src
-py main.py
+@echo off
+set PYTHONPATH=%CD%
+py ./src/main.py
