@@ -4,7 +4,9 @@ from test.utilstests import UtilsTests
 
 
 def run_all_tests():
-    # Run only the tests in the specified classes
+    """
+    Runs all tests
+    """
     test_classes_to_run = [MatrixDefinedGraphTests,
                            ListDefinedGraphTests,
                            UtilsTests,
