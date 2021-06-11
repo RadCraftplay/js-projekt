@@ -158,7 +158,7 @@ class FindRoutesForm(object):
         self._search.grid(row=5, column=0, columnspan=2)
 
     def search(self):
-        explorer = self._matrix_explorer if self._representation == "Macierz sąsiedztwa" else self._list_explorer
+        explorer = self._matrix_explorer if self._representation.get() == "Macierz sąsiedztwa" else self._list_explorer
         path = explorer.find_path_cities(self._city_from.get(), self._city_to.get())
 
         if not path:
