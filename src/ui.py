@@ -72,6 +72,9 @@ class SetupRoutesForm(object):
         self._confirm.grid(row=7, column=0, columnspan=2)
 
     def add_connection(self):
+        """
+        Runs when user presses connect button
+        """
         pair = NodePair(self._city_a.get(), self._city_b.get())
         inverse_pair = NodePair(pair.b, pair.a)
 
@@ -89,6 +92,9 @@ class SetupRoutesForm(object):
         self._connection_list.insert(0, pair)
 
     def remove_connection(self):
+        """
+        Runs when user presses disconnect button
+        """
         selected = self._connection_list.curselection()
         if len(selected) != 1:
             return
@@ -158,6 +164,9 @@ class FindRoutesForm(object):
         self._search.grid(row=5, column=0, columnspan=2)
 
     def search(self):
+        """
+        Runs when user presses search button
+        """
         explorer = self._matrix_explorer if self._representation.get() == "Macierz sąsiedztwa" else self._list_explorer
         path = explorer.find_path_cities(self._city_from.get(), self._city_to.get())
 

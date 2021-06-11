@@ -21,3 +21,6 @@ cities = [
     "Przeworsk",
     "Przemyśl"
 ]
+"""
+List of available cities
+"""

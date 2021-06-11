@@ -3,6 +3,9 @@ import copy
 
 
 class CityNotFoundError(Exception):
+    """
+    Throws if looked up city does not exist
+    """
     def __init__(self, name):
         self.name = name
 
@@ -11,6 +14,9 @@ class CityNotFoundError(Exception):
 
 
 def flatmap(array):
+    """
+    Flattens two-dimensional array
+    """
     ret_val = []
 
     for top_element in array:
@@ -21,6 +27,9 @@ def flatmap(array):
 
 
 def get_node_id_of_city_by_name(city_name):
+    """
+    Looks for a city id
+    """
     for index, name in enumerate(cities):
         if name == city_name:
             return index
@@ -28,10 +37,16 @@ def get_node_id_of_city_by_name(city_name):
 
 
 def get_city_name_by_node_id(node_id):
+    """
+    Looks for a city name
+    """
     return cities[node_id]
 
 
 def print_path(node_list):
+    """
+    Pretty prints path saved as a list of nodes
+    """
     if len(node_list) == 0:
         return ""
 

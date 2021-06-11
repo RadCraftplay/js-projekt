@@ -4,6 +4,12 @@ from src import utils, data
 class Generators(object):
     @staticmethod
     def generate_adjacency_lists(list_of_node_pairs):
+        """
+        Generates adjacency lists based on list of node pairs
+
+        :param list_of_node_pairs: Connected node pairs
+        :return: Adjacency lists
+        """
         adjacency_lists = [[] for _ in data.cities]
 
         for pair in list_of_node_pairs:
@@ -14,6 +20,12 @@ class Generators(object):
 
     @staticmethod
     def generate_adjacency_matrix(list_of_node_pairs):
+        """
+        Generates adjacency matrix based on list of node pairs
+
+        :param list_of_node_pairs: Connected node pairs
+        :return: Adjacency matrix
+        """
         adjacency_matrix = [[0 for _ in data.cities] for _ in data.cities]
 
         for pair in list_of_node_pairs:
@@ -29,6 +41,11 @@ class NodePair(object):
         self.b = b
 
     def to_graph_node_ids(self):
+        """
+        Gets node ids from city names
+
+        :return: Tuple of node ids
+        """
         a_id = utils.get_node_id_of_city_by_name(self.a)
         b_id = utils.get_node_id_of_city_by_name(self.b)
         return a_id, b_id
@@ -42,18 +59,46 @@ class NodePair(object):
 
 class AbstractGraph(object):
     def get_node_list(self):
+        """
+        Returns list of nodes in a graph
+
+        :return: List of nodes in a graph
+        """
         raise NotImplementedError()
 
     def get_amount_of_nodes(self):
+        """
+        Returns amount of nodes in a graph
+
+        :return: Amount nodes in a graph
+        """
         return len(self.get_node_list())
 
     def get_incidental_edges(self, node):
+        """
+        Returns incidental edges of a node
+
+        :param node: Node id to look for edges of
+        :return: Incidental edges of a node
+        """
         raise NotImplementedError()
 
     def get_nodes_connected_by_edge(self, edge):
+        """
+        Returns nodes connected by an edge
+
+        :param edge: Id of an edge to look connected nodes for
+        :return: List of nodes connected by an edge
+        """
         raise NotImplementedError()
 
     def get_neighbour_nodes(self, node):
+        """
+        Returns list of neighbours (nodes) of an provided node
+
+        :param node: Node id to look for neighbours of
+        :return: List of neighbours (nodes) of an provided node
+        """
         edges = self.get_incidental_edges(node)
         nodes = [self.get_nodes_connected_by_edge(edge) for edge in edges]
         nodes = utils.flatmap(nodes)
@@ -66,6 +111,9 @@ class MatrixDefinedGraph(AbstractGraph):
 
     @staticmethod
     def to_incidence_matrix(adjacency_matrix):
+        """
+        Creates incidence matrix from adjacency matrix
+        """
         edges = []
         for node_id in range(len(adjacency_matrix)):
             for pointed_node_id in range(len(adjacency_matrix[node_id])):
@@ -104,6 +152,9 @@ class ListDefinedGraph(AbstractGraph):
 
     @staticmethod
     def to_incidental_edge_list(list_of_adjacency_lists):
+        """
+        Creates list of incidental edges from adjacency lists
+        """
         edges = []
         for index, adjacency_list in enumerate(list_of_adjacency_lists):
             for node in adjacency_list:
