@@ -60,9 +60,9 @@ class Generators(object):
 
 
 class NodePair(object):
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+    def __init__(self, city_a_name, city_b_name):
+        self.a = city_a_name
+        self.b = city_b_name
 
     def to_graph_node_ids(self):
         """
