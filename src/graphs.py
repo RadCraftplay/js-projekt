@@ -1,4 +1,5 @@
 from src import utils, data
+from abc import ABCMeta, abstractmethod
 
 
 class Generators(object):
@@ -57,7 +58,8 @@ class NodePair(object):
         return self.a == other.a and self.b == other.b
 
 
-class AbstractGraph(object):
+class AbstractGraph(metaclass=ABCMeta):
+    @abstractmethod
     def get_node_list(self):
         """
         Returns list of nodes in a graph
@@ -74,6 +76,7 @@ class AbstractGraph(object):
         """
         return len(self.get_node_list())
 
+    @abstractmethod
     def get_incidental_edges(self, node):
         """
         Returns incidental edges of a node
@@ -83,6 +86,7 @@ class AbstractGraph(object):
         """
         raise NotImplementedError()
 
+    @abstractmethod
     def get_nodes_connected_by_edge(self, edge):
         """
         Returns nodes connected by an edge
