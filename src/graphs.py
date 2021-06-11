@@ -66,7 +66,7 @@ class AbstractGraph(metaclass=ABCMeta):
 
         :return: List of nodes in a graph
         """
-        raise NotImplementedError()
+        pass
 
     def get_amount_of_nodes(self):
         """
@@ -84,7 +84,7 @@ class AbstractGraph(metaclass=ABCMeta):
         :param node: Node id to look for edges of
         :return: Incidental edges of a node
         """
-        raise NotImplementedError()
+        pass
 
     @abstractmethod
     def get_nodes_connected_by_edge(self, edge):
@@ -94,7 +94,7 @@ class AbstractGraph(metaclass=ABCMeta):
         :param edge: Id of an edge to look connected nodes for
         :return: List of nodes connected by an edge
         """
-        raise NotImplementedError()
+        pass
 
     def get_neighbour_nodes(self, node):
         """
