@@ -2,6 +2,21 @@ from src import utils, data
 from abc import ABCMeta, abstractmethod
 
 
+class GenerationError(Exception):
+    def __init__(self, inner_exception):
+        self.inner_exception = inner_exception
+
+
+class AdjacencyListGenerationError(GenerationError):
+    def __str__(self):
+        return "Wystąpił błąd w trakcie generowania listy sąsiedztwa:\n" + str(self.inner_exception)
+
+
+class AdjacencyMatrixGenerationError(GenerationError):
+    def __str__(self):
+        return "Wystąpił błąd w trakcie generowania macierzy sąsiedztwa:\n" + str(self.inner_exception)
+
+
 class Generators(object):
     @staticmethod
     def generate_adjacency_lists(list_of_node_pairs):
@@ -14,7 +29,11 @@ class Generators(object):
         adjacency_lists = [[] for _ in data.cities]
 
         for pair in list_of_node_pairs:
-            a, b = pair.to_graph_node_ids()
+            try:
+                a, b = pair.to_graph_node_ids()
+            except utils.CityNotFoundError as err:
+                raise AdjacencyListGenerationError(err)
+
             adjacency_lists[a].append(b)
 
         return adjacency_lists
@@ -30,7 +49,11 @@ class Generators(object):
         adjacency_matrix = [[0 for _ in data.cities] for _ in data.cities]
 
         for pair in list_of_node_pairs:
-            a, b = pair.to_graph_node_ids()
+            try:
+                a, b = pair.to_graph_node_ids()
+            except utils.CityNotFoundError as err:
+                raise AdjacencyMatrixGenerationError(err)
+
             adjacency_matrix[a][b] = 1
 
         return adjacency_matrix
