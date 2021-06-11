@@ -1,8 +1,13 @@
+from src.data import initial_connections
+from src.graphs import NodePair
 from src.ui import SetupRoutesForm, FindRoutesForm, CloseReason
-import data
 
 if __name__ == '__main__':
-    setupForm = SetupRoutesForm(data.initial_connections)
+    # Transform list of tuples into list of nodes
+    # Can't do nodes in data module (circular reference)
+    connections = list(map(lambda city_tuple: NodePair(city_tuple[0], city_tuple[1]), initial_connections))
+
+    setupForm = SetupRoutesForm(connections)
     setupForm.show()
 
     while setupForm.close_reason == CloseReason.OK:

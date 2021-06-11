@@ -1,5 +1,3 @@
-from graphs import NodePair
-
 
 cities = [
     "Wrocław",
@@ -28,24 +26,27 @@ List of available cities
 """
 
 initial_connections = [
-    NodePair("Wrocław", "Gliwice"),
-    NodePair("Katowice", "Gliwice"),
-    NodePair("Katowice", "Zawiercie"),
-    NodePair("Katowice", "Kraków"),
-    NodePair("Kraków", "Oświęcim"),
-    NodePair("Kraków", "Miechów"),
-    NodePair("Miechów", "Kielce"),
-    NodePair("Kielce", "Radom"),
-    NodePair("Miechów", "Warszawa"),
-    NodePair("Kraków", "Wieliczka"),
-    NodePair("Kraków", "Rabka-Zdrój"),
-    NodePair("Rabka-Zdrój", "Nowy Targ"),
-    NodePair("Nowy Targ", "Zakopane"),
-    NodePair("Rabka-Zdrój", "Nowy Sącz"),
-    NodePair("Nowy Sącz", "Tarnów"),
-    NodePair("Kraków", "Tarnów"),
-    NodePair("Tarnów", "Dębica"),
-    NodePair("Dębica", "Rzeszów"),
-    NodePair("Rzeszów", "Przeworsk"),
-    NodePair("Przeworsk", "Przemyśl")
+    ("Wrocław", "Gliwice"),
+    ("Katowice", "Gliwice"),
+    ("Katowice", "Zawiercie"),
+    ("Katowice", "Kraków"),
+    ("Kraków", "Oświęcim"),
+    ("Kraków", "Miechów"),
+    ("Miechów", "Kielce"),
+    ("Kielce", "Radom"),
+    ("Miechów", "Warszawa"),
+    ("Kraków", "Wieliczka"),
+    ("Kraków", "Rabka-Zdrój"),
+    ("Rabka-Zdrój", "Nowy Targ"),
+    ("Nowy Targ", "Zakopane"),
+    ("Rabka-Zdrój", "Nowy Sącz"),
+    ("Nowy Sącz", "Tarnów"),
+    ("Kraków", "Tarnów"),
+    ("Tarnów", "Dębica"),
+    ("Dębica", "Rzeszów"),
+    ("Rzeszów", "Przeworsk"),
+    ("Przeworsk", "Przemyśl")
 ]
+"""
+List of initial connections
+"""
