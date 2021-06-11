@@ -1,4 +1,6 @@
 from collections import deque
+
+from src import utils
 from src.graphs import AbstractGraph
 
 
@@ -10,6 +12,11 @@ class GraphExplorer(object):
 
     def find_path(self, starting_node, ending_node):
         raise NotImplementedError()
+
+    def find_path_cities(self, starting_city, destination_city):
+        c_from = utils.get_node_id_of_city_by_name(starting_city)
+        c_to = utils.get_node_id_of_city_by_name(destination_city)
+        return self.find_path(c_from, c_to)
 
 
 class BfsExplorer(GraphExplorer):

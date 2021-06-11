@@ -159,9 +159,7 @@ class FindRoutesForm(object):
 
     def search(self):
         explorer = self._matrix_explorer if self._representation == "Macierz sąsiedztwa" else self._list_explorer
-        c_from = utils.get_node_id_of_city_by_name(self._city_from.get())
-        c_to = utils.get_node_id_of_city_by_name(self._city_to.get())
-        path = explorer.find_path(c_from, c_to)
+        path = explorer.find_path_cities(self._city_from.get(), self._city_to.get())
 
         if not path:
             messagebox.showwarning("Nie udało się znaleźć połączenia", "Brak połączenia na tej trasie")

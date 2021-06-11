@@ -1,12 +1,14 @@
 import unittest
 
-from src import graphs, explorers
+from src import graphs, explorers, data
 
 
 class BfsExplorerTests(unittest.TestCase):
+    def setUp(self):
+        self.test_proper_matrix = [[0, 0, 1], [0, 0, 1], [1, 1, 0]]
+
     def test_find_path(self):
-        test_matrix = [[0, 0, 1], [0, 0, 1], [1, 1, 0]]
-        test_graph = graphs.MatrixDefinedGraph(test_matrix)
+        test_graph = graphs.MatrixDefinedGraph(self.test_proper_matrix)
         explorer = explorers.BfsExplorer(test_graph)
         path = explorer.find_path(0, 1)
         self.assertSequenceEqual(path, [0, 2, 1])
@@ -17,6 +19,12 @@ class BfsExplorerTests(unittest.TestCase):
         explorer = explorers.BfsExplorer(test_graph)
         path = explorer.find_path(0, 1)
         self.assertSequenceEqual(path, [])
+
+    def test_find_path_cities(self):
+        test_graph = graphs.MatrixDefinedGraph(self.test_proper_matrix)
+        explorer = explorers.BfsExplorer(test_graph)
+        path = explorer.find_path_cities(data.cities[0], data.cities[1])
+        self.assertSequenceEqual(path, [0, 2, 1])
 
 
 if __name__ == '__main__':
