@@ -76,8 +76,9 @@ class SetupRoutesForm(object):
         self._confirm.grid(row=7, column=0, columnspan=2)
 
         # Add existing connections
+        add_connection = lambda c: self._connection_list.insert(0, c)
         for connection in reversed(self.list_of_connections):
-            self._connection_list.insert(0, connection)
+            add_connection(connection)
 
     def add_connection(self):
         """
