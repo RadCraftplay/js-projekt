@@ -83,7 +83,3 @@ class UtilsTests(unittest.TestCase):
         result = utils.print_path(path)
 
         self.assertEqual(result, expected_string)
-
-
-if __name__ == '__main__':
-    unittest.main()

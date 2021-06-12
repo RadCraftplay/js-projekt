@@ -131,7 +131,3 @@ class BfsExplorerTests(unittest.TestCase):
         explorer = explorers.BfsExplorer(test_graph)
         path = explorer.find_path_cities(data.cities[0], data.cities[1])
         self.assertSequenceEqual(path, [0, 2, 1])
-
-
-if __name__ == '__main__':
-    unittest.main()

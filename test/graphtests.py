@@ -136,25 +136,3 @@ class ListDefinedGraphTests(unittest.TestCase):
         self.assertSequenceEqual(neighbours_0, [2])
         self.assertSequenceEqual(neighbours_1, [2])
         self.assertSequenceEqual(neighbours_2, [0, 1])
-
-
-def run_some_tests():
-    """
-    Runs only the tests in the specified classes
-    """
-    test_classes_to_run = [MatrixDefinedGraphTests, ListDefinedGraphTests]
-    loader = unittest.TestLoader()
-
-    suites_list = []
-    for test_class in test_classes_to_run:
-        suite = loader.loadTestsFromTestCase(test_class)
-        suites_list.append(suite)
-
-    big_suite = unittest.TestSuite(suites_list)
-
-    runner = unittest.TextTestRunner()
-    return runner.run(big_suite)
-
-
-if __name__ == '__main__':
-    results = run_some_tests()
