@@ -1,3 +1,4 @@
 @echo off
-py alltests.py
+set PYTHONPATH=%CD%
+py ./test/alltests.py
 pause
